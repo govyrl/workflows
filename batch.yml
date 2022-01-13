@@ -1,0 +1,47 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+# Triggers the workflow on push or pull request events but only for the main branch
+#   push:
+#     branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
+
+  # Allows reusing workflow
+  workflow_call:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+jobs:
+  build-and-push:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+    - uses: taylorsmithgg/aws-ecr-action@v0.1-debug
+      if: ${{ github.ref == 'refs/heads/main' }}
+      with:
+        access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+        repo: ${{ github.repository }}
+        region: us-west-2
+        tags: latest,${{ github.sha }}
+        create_repo: true
+        extra_build_args: "--build-arg access_token=${{ secrets.ACCESS_TOKEN }} --build-arg jfrog_user=${{ secrets.JFROG_USER }} --build-arg jfrog_password=${{ secrets.JFROG_PASSWORD }}"
+#         set_repo_policy: true
+#         repo_policy_file: repo-policy.json
+    - uses: taylorsmithgg/aws-ecr-action@v0.1-debug
+      if: ${{ github.ref != 'refs/heads/main' }}
+      with:
+        access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+        repo: ${{ github.repository }}
+        region: us-west-2
+        tags: ${{ github.ref_name }},${{ github.sha }}
+        create_repo: true
+        extra_build_args: "--build-arg access_token=${{ secrets.ACCESS_TOKEN }} --build-arg jfrog_user=${{ secrets.JFROG_USER }} --build-arg jfrog_password=${{ secrets.JFROG_PASSWORD }}"
+#         set_repo_policy: true
+#         repo_policy_file: repo-policy.json
