@@ -23,7 +23,7 @@ jobs:
         tags: latest,${{ github.sha }}
         account_id: ${{ secrets.account_id }}
         create_repo: true
-        extra_build_args: "--build-arg --build-arg jfrog_user=${{ secrets.jfrog_user }} --build-arg jfrog_password=${{ secrets.jfrog_password }}"
+        extra_build_args: "--build-arg jfrog_user=${{ secrets.jfrog_user }} --build-arg jfrog_password=${{ secrets.jfrog_password }}"
 #         set_repo_policy: true
 #         repo_policy_file: repo-policy.json
     - uses: taylorsmithgg/aws-ecr-action@v1
@@ -33,6 +33,6 @@ jobs:
         region: us-west-2
         tags: ${{ github.ref_name }},${{ github.sha }}
         create_repo: true
-        extra_build_args: "--build-arg --build-arg jfrog_user=${{ secrets.jfrog_user }} --build-arg jfrog_password=${{ secrets.jfrog_password }}"
+        extra_build_args: "--build-arg jfrog_user=${{ secrets.jfrog_user }} --build-arg jfrog_password=${{ secrets.jfrog_password }}"
 #         set_repo_policy: true
 #         repo_policy_file: repo-policy.json
