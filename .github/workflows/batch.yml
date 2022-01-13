@@ -4,7 +4,11 @@ name: batch
 on:
   workflow_call:
     secrets:
-      access_key_id:
+      account_id:
+        required: true
+      jfrog_user:
+        required: true
+      jfrog_password:
         required: true
 jobs:
   build-and-push:
