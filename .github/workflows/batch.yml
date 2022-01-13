@@ -21,6 +21,7 @@ jobs:
         repo: ${{ github.repository }}
         region: us-west-2
         tags: latest,${{ github.sha }}
+        account_id: ${{ secrets.account_id }}
         create_repo: true
         extra_build_args: "--build-arg --build-arg jfrog_user=${{ secrets.jfrog_user }} --build-arg jfrog_password=${{ secrets.jfrog_password }}"
 #         set_repo_policy: true
