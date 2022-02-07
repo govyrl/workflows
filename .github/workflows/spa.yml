@@ -5,22 +5,7 @@ name: Single Page Application
 # Controls when the workflow will run
 on:
   workflow_call:
-    # secrets:
-    #   account_id:
-    #     required: true
-    #   jfrog_user:
-    #     required: true
-    #   jfrog_password:
-    #     required: true
-# Specific branches for deployments
-  push:
-    branches: [ main, blue, green, orange, red, black, alpha ]
-jobs:
-  build-and-deploy:
-    runs-on: self-hosted
-    env:
-      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-      VENV: ${{ github.ref_name }}
+    secrets:
       API_GATEWAY_URI: ${{ secrets.API_GATEWAY_URI }}
       AWS_PRODUCTION_BUCKET_NAME: ${{ secrets.AWS_PRODUCTION_BUCKET_NAME }}
       AWS_S3_BUCKET: ${{ secrets.AWS_PRODUCTION_BUCKET_NAME }}
@@ -39,6 +24,33 @@ jobs:
       REACT_APP_WHAT_ENV_AM_I: ${{ secrets.REACT_APP_WHAT_ENV_AM_I }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+# Specific branches for deployments
+  push:
+    branches: [ main, blue, green, orange, red, black, alpha ]
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+    env:
+      API_GATEWAY_URI: ${{ secrets.API_GATEWAY_URI }}
+      AWS_PRODUCTION_BUCKET_NAME: ${{ secrets.AWS_PRODUCTION_BUCKET_NAME }}
+      AWS_S3_BUCKET: ${{ secrets.AWS_PRODUCTION_BUCKET_NAME }}
+      CARRO_APP_ORIGIN: ${{ secrets.CARRO_APP_ORIGIN }}
+      REACT_APP_BACON_SRC: ${{ secrets.REACT_APP_BACON_SRC }}
+      REACT_APP_BLACKLIST_URI: ${{ secrets.REACT_APP_BLACKLIST_URI }}
+      REACT_APP_FACEBOOK_APP_ID: ${{ secrets.REACT_APP_FACEBOOK_APP_ID }}
+      REACT_APP_FACEBOOK_PIXEL_ID: ${{ secrets.REACT_APP_FACEBOOK_PIXEL_ID }}
+      REACT_APP_FACEBOOK_SCOPE: ${{ secrets.REACT_APP_FACEBOOK_SCOPE }}
+      REACT_APP_FACEBOOK_SDK_VERSION: ${{ secrets.REACT_APP_FACEBOOK_SDK_VERSION }}
+      REACT_APP_GA_TRACKING_ID: ${{ secrets.REACT_APP_GA_TRACKING_ID }}
+      REACT_APP_GOOGLE_CLIENT_ID: ${{ secrets.REACT_APP_GOOGLE_CLIENT_ID }}
+      REACT_APP_GRAPHQL_URI: ${{ secrets.REACT_APP_GRAPHQL_URI }}
+      REACT_APP_INTERCOM_APP_ID: ${{ secrets.REACT_APP_INTERCOM_APP_ID }}
+      REACT_APP_UPSELL_URI: ${{ secrets.REACT_APP_UPSELL_URI }}
+      REACT_APP_WHAT_ENV_AM_I: ${{ secrets.REACT_APP_WHAT_ENV_AM_I }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+      VENV: ${{ github.ref_name }}
       SOURCE_DIR: "./build"
     strategy:
       matrix:
