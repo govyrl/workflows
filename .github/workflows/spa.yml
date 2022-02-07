@@ -12,6 +12,9 @@ on:
     #     required: true
     #   jfrog_password:
     #     required: true
+# Specific branches for deployments
+  push:
+    branches: [ main, blue, green, orange, red, black, alpha ]
 jobs:
   build-and-deploy:
     runs-on: self-hosted
