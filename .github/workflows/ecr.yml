@@ -16,7 +16,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: taylorsmithgg/aws-ecr-action@v1
-      if: ${{ github.ref == 'refs/heads/main' }}
+      if: ${{ github.ref == 'refs/heads/main' || github.ref != 'refs/heads/master' }}
       with:
         repo: ${{ github.repository }}
         region: us-west-2
@@ -32,6 +32,7 @@ jobs:
         repo: ${{ github.repository }}
         region: us-west-2
         tags: ${{ github.ref_name }},${{ github.sha }}
+        account_id: ${{ secrets.account_id }}
         create_repo: true
         extra_build_args: "--build-arg jfrog_user=${{ secrets.jfrog_user }} --build-arg jfrog_password=${{ secrets.jfrog_password }}"
 #         set_repo_policy: true
