@@ -12,6 +12,8 @@ on:
         required: true
       npm_token:
         required: false
+      access_token:
+        required: false
 jobs:
   build-and-push:
     runs-on: self-hosted
@@ -25,7 +27,7 @@ jobs:
         tags: latest,${{ github.sha }}
         account_id: ${{ secrets.account_id }}
         create_repo: true
-        extra_build_args: "--build-arg npm_token=${{ secrets.npm_token }} --build-arg jfrog_user=${{ secrets.jfrog_user }} --build-arg jfrog_password=${{ secrets.jfrog_password }}"
+        extra_build_args: "--build-arg access_token=${{ secrets.access_token }} --build-arg npm_token=${{ secrets.npm_token }} --build-arg jfrog_user=${{ secrets.jfrog_user }} --build-arg jfrog_password=${{ secrets.jfrog_password }}"
 #         set_repo_policy: true
 #         repo_policy_file: repo-policy.json
     - uses: taylorsmithgg/aws-ecr-action@v1.1
