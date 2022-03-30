@@ -16,6 +16,8 @@ on:
         required: false
 jobs:
   build-and-push:
+    env:
+      DOCKER_BUILDKIT: 1
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
