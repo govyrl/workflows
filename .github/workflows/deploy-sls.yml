@@ -27,7 +27,7 @@ jobs:
       shell: bash
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       id: extract_branch
-    - run: npm ci
+    - run: npm ci --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     - name: serverless deploy
