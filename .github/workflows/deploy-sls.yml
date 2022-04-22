@@ -2,7 +2,9 @@ name: Deploy SLS Project
 
 on:
   workflow_call:
-
+    secrets:
+      npm_token:
+        required: true
   push:
     branches: [ main, blue, green, orange, red, black, alpha ]
 
@@ -19,11 +21,15 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+        registry-url: https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
+        scope: 'dev@getcarro.com'
     - name: Extract branch name
       shell: bash
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       id: extract_branch
     - run: npm ci
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     - name: serverless deploy
       uses: serverless/github-action@master
       with:
