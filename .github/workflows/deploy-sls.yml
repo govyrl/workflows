@@ -22,7 +22,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         registry-url: https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
-        scope: 'dev@getcarro.com'
+        scope: 'taylor@vyrl.co'
     - name: Extract branch name
       shell: bash
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
