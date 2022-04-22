@@ -1,6 +1,8 @@
 name: Deploy SLS Project
 
 on:
+  workflow_call:
+
   push:
     branches: [ main, blue, green, orange, red, black, alpha ]
 
