@@ -1,6 +1,10 @@
 name: Node.js CI
 
-on: [push]
+on:
+  workflow_call:
+    secrets:
+      npm_token:
+        required: true
 
 jobs:
   build:
@@ -9,7 +13,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 15.x, 16.x, 17.x]
+        node-version: [16.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -17,7 +21,11 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+      - name: 'Create .npmrc'
+        shell: bash
+        run: |
+          curl -u github:${{ secrets.NPM_TOKEN }} "https://govyrl.jfrog.io/govyrl/api/npm/auth/" > .npmrc
       - name: Install dependencies
-        run: npm ci
-      - run: npm run build --if-present
-      - run: npm test
+        run: npm ci --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
+      - run: npm run build --if-present --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
+      - run: npm test --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
