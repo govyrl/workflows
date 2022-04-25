@@ -27,5 +27,8 @@ jobs:
           curl -u github:${{ secrets.NPM_TOKEN }} "https://govyrl.jfrog.io/govyrl/api/npm/auth/" > .npmrc
       - name: Install dependencies
         run: npm ci --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
-      - run: npm run build --if-present --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
-      - run: npm test --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
+      - name: Test
+        continue-on-error: true
+        run: npm test --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
+      - name: Build
+        run: npm run build --if-present --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
