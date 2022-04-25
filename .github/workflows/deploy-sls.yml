@@ -29,11 +29,12 @@ jobs:
       shell: bash
       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
       id: extract_branch
-    - run: npm ci --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
     - name: Install PostgreSQL client
       run: |
         apt-get update
         apt-get install --yes postgresql-dev
+    - name: Run npm CI
+      run: npm ci --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
     - name: serverless deploy
       uses: serverless/github-action@master
       with:
