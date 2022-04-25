@@ -31,8 +31,8 @@ jobs:
       id: extract_branch
     - name: Install PostgreSQL client
       run: |
-        apt-get update
-        apt-get install --yes postgresql-dev
+        sudo apt-get update
+        sudo apt-get install --yes postgresql-dev
     - name: Run npm CI
       run: npm ci --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
     - name: serverless deploy
