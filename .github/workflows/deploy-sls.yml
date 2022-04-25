@@ -32,7 +32,7 @@ jobs:
     - name: Install PostgreSQL client
       run: |
         sudo apt-get update
-        sudo apt-get install --yes postgresql-dev
+        sudo apt-get install --yes libpq-dev
     - name: Run npm CI
       run: npm ci --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
     - name: serverless deploy
