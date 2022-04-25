@@ -20,7 +20,7 @@ jobs:
     - name: 'Create .npmrc'
       shell: bash
       run: |
-        curl -u ${{ secrets.NPM_TOKEN }} "https://govyrl.jfrog.io/govyrl/api/npm/auth/" > .npmrc
+        curl -u github:${{ secrets.NPM_TOKEN }} "https://govyrl.jfrog.io/govyrl/api/npm/auth/" > .npmrc
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
