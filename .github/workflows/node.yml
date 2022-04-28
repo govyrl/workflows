@@ -5,6 +5,8 @@ on:
     secrets:
       account_id:
         required: true
+      npm_token:
+        required: true
 
 jobs:
   build:
