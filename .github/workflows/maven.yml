@@ -1,6 +1,12 @@
 name: Java CI
 
-on: [push]
+on:
+  workflow_call:
+    secrets:
+      jfrog_user:
+        required: true
+      jfrog_password:
+        required: true
 
 jobs:
   build:
