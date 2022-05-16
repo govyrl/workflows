@@ -24,13 +24,13 @@ jobs:
             [
               {
                 "id": "vyrl", 
-                "username": ${{ secrets.JFROG_USER }},
-                "password": ${{ secrets.JFROG_PASSWORD }}
+                "username": "${{ secrets.JFROG_USER }}",
+                "password": "${{ secrets.JFROG_PASSWORD }}"
               },
               {
                 "id": "vyrl-snapshots", 
-                "username": ${{ secrets.JFROG_USER }},
-                "password": ${{ secrets.JFROG_PASSWORD }}
+                "username": "${{ secrets.JFROG_USER }}",
+                "password": "${{ secrets.JFROG_PASSWORD }}"
               }
             ]
       - name: Build with Maven
