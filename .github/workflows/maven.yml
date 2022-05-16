@@ -21,7 +21,7 @@ jobs:
       - uses: s4u/maven-settings-action@v2.6.0
         with:
           servers: | 
-            '[
+            [
               {
                 "id": "vyrl", 
                 "username": ${{ secrets.JFROG_USER }},
@@ -32,6 +32,6 @@ jobs:
                 "username": ${{ secrets.JFROG_USER }},
                 "password": ${{ secrets.JFROG_PASSWORD }}
               }
-            ]'
+            ]
       - name: Build with Maven
         run: ./mvnw --batch-mode --update-snapshots package
