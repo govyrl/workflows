@@ -40,5 +40,9 @@ jobs:
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
+      - name: Install Dependencies with Apt Get
+        run: |
+          sudo apt-get update
+          sudo apt-get install python3.8 jq awscli -y
       - name: Deploy
         run: ./mvnw deploy -Dstage=${{ steps.extract_branch.outputs.branch }}
