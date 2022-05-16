@@ -19,6 +19,23 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+      - uses: s4u/maven-settings-action@v2.6.0
+        with:
+          servers: | 
+            [
+              {
+                "id": "vyrl", 
+                "username": "${{ secrets.JFROG_USER }}",
+                "password": "${{ secrets.JFROG_PASSWORD }}"
+              },
+              {
+                "id": "vyrl-snapshots", 
+                "username": "${{ secrets.JFROG_USER }}",
+                "password": "${{ secrets.JFROG_PASSWORD }}"
+              }
+            ]
+      - name: Build with Maven
+        run: ./mvnw --batch-mode --update-snapshots package
       - name: Extract branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
