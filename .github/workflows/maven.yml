@@ -34,4 +34,4 @@ jobs:
               }
             ]
       - name: Build with Maven
-        run: ./mvnw --batch-mode --update-snapshots package
+        run: ./mvnw --batch-mode --update-snapshots package -Dmaven.artifact.threads=30 -T 2C
