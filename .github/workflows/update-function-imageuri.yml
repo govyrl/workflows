@@ -10,5 +10,5 @@ jobs:
     - uses: taylorsmithgg/aws-update-lambda-imageuri-action@v0.1
       if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' }}
       with:
-        stackName: ${{ github.repository }}
+        stackname: ${{ github.repository }}
         
