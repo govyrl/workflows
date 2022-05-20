@@ -1,0 +1,14 @@
+name: Update Funciton ImageURI
+# Controls when the workflow will run
+on:
+  workflow_call:
+jobs:
+  update-function-imageuri:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+    - uses: taylorsmithgg/update-function-imageuri.yml@v0.1
+      if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' }}
+      with:
+        stackName: ${{ github.repository }}
+        
