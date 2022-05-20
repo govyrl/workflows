@@ -6,9 +6,8 @@ jobs:
   update-function-imageuri:
     runs-on: self-hosted
     steps:
-    - uses: actions/checkout@v2
     - uses: taylorsmithgg/aws-update-lambda-imageuri-action@v0.4
       if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' }}
       with:
-        stackname: ${{ github.repository }}
+        stackname: ${{ github.event.repository.name }}
         
