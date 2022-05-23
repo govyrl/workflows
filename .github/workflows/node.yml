@@ -34,7 +34,7 @@ jobs:
         run: npm test --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
       - name: Build
         run: npm run build --if-present --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
-      - uses: taylorsmithgg/aws-ecr-action@v1.6
+      - uses: taylorsmithgg/aws-ecr-action@v1.5
         name: Docker
         with:
           repo: ${{ github.repository }}
