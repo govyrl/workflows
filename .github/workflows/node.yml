@@ -28,15 +28,15 @@ jobs:
       - name: 'Create .npmrc'
         shell: bash
         run: |
-          echo "Writing .npmrc to: ${HOME}/.npmrc"
-          curl -u github:${{ secrets.NPM_TOKEN }} "https://govyrl.jfrog.io/govyrl/api/npm/auth/" > ${HOME}/.npmrc
-      - name: Install dependencies
-        run: npm ci --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
-      - name: Test
-        continue-on-error: true
-        run: npm test --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
-      - name: Build
-        run: npm run build --if-present --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
+          echo "Writing .npmrc to: ./.npmrc"
+          curl -u github:${{ secrets.NPM_TOKEN }} "https://govyrl.jfrog.io/govyrl/api/npm/auth/" > ./.npmrc
+#       - name: Install dependencies
+#         run: npm ci --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
+#       - name: Test
+#         continue-on-error: true
+#         run: npm test --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
+#       - name: Build
+#         run: npm run build --if-present --registry https://govyrl.jfrog.io/govyrl/api/npm/vyrl-repo-virtual/
       - uses: taylorsmithgg/aws-ecr-action@v1.2
         name: Docker
         with:
@@ -45,4 +45,4 @@ jobs:
           tags: latest,${{ github.sha }}
           account_id: ${{ secrets.account_id }}
           create_repo: true
-          extra_build_args: "--secret id=npm,src=${{ env.HOME }}/.npmrc"
+          extra_build_args: "--secret id=npm,src=./.npmrc"
