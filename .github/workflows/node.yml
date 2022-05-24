@@ -45,3 +45,4 @@ jobs:
           tags: latest,${{ github.sha }}
           account_id: ${{ secrets.account_id }}
           create_repo: true
+          extra_build_args: "--secret id=npm,src=$HOME/.npmrc"
