@@ -43,7 +43,7 @@ jobs:
       - name: SAM Deploy
         run: |
           # Run SAM Deploy
-          sam deploy --template-file .aws-sam/build/template.yaml \ 
+          sam deploy \ 
           --config-file samconfig.toml \
           --no-execute-changeset \
           --config-env ${{ steps.vars.outputs.branch }} \
