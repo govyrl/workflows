@@ -15,7 +15,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install python3.8 jq -y
-          sudo -H python3 -m pip install aws-sam-cli
+      - uses: aws-actions/setup-sam@v1
       - name: SAM Validate
         run: |
           sam validate
