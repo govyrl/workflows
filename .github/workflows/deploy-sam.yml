@@ -11,10 +11,7 @@ jobs:
       env-name: ${{ steps.env-name.outputs.environment }}
     steps:
       - uses: actions/checkout@v2
-      - name: Install Dependencies with Apt Get
-        run: |
-          sudo apt-get update
-          sudo apt-get install python3.8 jq -y
+      - uses: actions/setup-python@v2
       - uses: aws-actions/setup-sam@v1
       - name: SAM Validate
         run: |
