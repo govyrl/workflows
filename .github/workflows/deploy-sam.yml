@@ -43,7 +43,7 @@ jobs:
       - name: SAM Deploy
         run: |
           # Run SAM Deploy
-          sam deploy --config-file samconfig.toml --config-env ${{ steps.vars.outputs.branch }} --resolve-image-repos
+          sam deploy --config-file samconfig.toml --config-env ${{ steps.vars.outputs.branch }} --resolve-image-repos --no-fail-on-empty-changeset
 #            --no-execute-changeset
 #            --parameter-overrides \
 #              'ParameterKey=Name,ParameterValue=example \
