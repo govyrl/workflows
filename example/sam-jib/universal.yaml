@@ -1,0 +1,29 @@
+name: Universal Deploy
+
+# Controls when the workflow will run
+on:
+# Triggers the workflow on push or pull request events but only for the main branch
+#   push:
+#     branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+jobs:
+  ecr:
+    uses: govyrl/workflows/.github/workflows/ecr.yml@9734bc0d2e781fea96c799b9ca8a743cf6972ec1
+    secrets:
+      account_id: ${{ secrets.AWS_ACCOUNT_ID }}
+      jfrog_user: ${{ secrets.JFROG_USER }}
+      jfrog_password: ${{ secrets.JFROG_PASSWORD }}
+  gradle:
+    uses: govyrl/workflows/.github/workflows/gradle.yml@3c4797db9c7a3e63d6458810c2565e395ccc176f
+    secrets:
+      jfrog_user: ${{ secrets.ORG_GRADLE_PROJECT_JFROG_USER }}
+      jfrog_password: ${{ secrets.ORG_GRADLE_PROJECT_JFROG_PASSWORD }}
+  sam:
+    uses: govyrl/workflows/.github/workflows/deploy-sam.yml@2db525f2be120a82dc444a481a59596a38c60ab8
+  update-function-imageuri:
+    if: ${{ github.ref != 'refs/heads/prod' }}
+    uses: govyrl/workflows/.github/workflows/update-function-imageuri.yml@7486491892c40065d8401102f7165c063296ebd1
