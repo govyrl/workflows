@@ -23,7 +23,9 @@ jobs:
       jfrog_user: ${{ secrets.ORG_GRADLE_PROJECT_JFROG_USER }}
       jfrog_password: ${{ secrets.ORG_GRADLE_PROJECT_JFROG_PASSWORD }}
   sam:
+    needs: [ecr, gradle]
     uses: govyrl/workflows/.github/workflows/deploy-sam.yml@2db525f2be120a82dc444a481a59596a38c60ab8
   update-function-imageuri:
     if: ${{ github.ref != 'refs/heads/prod' }}
+    needs: [ecr, gradle]
     uses: govyrl/workflows/.github/workflows/update-function-imageuri.yml@7486491892c40065d8401102f7165c063296ebd1
