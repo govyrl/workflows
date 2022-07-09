@@ -12,7 +12,7 @@ on:
   workflow_dispatch:
 jobs:
   ecr:
-    uses: govyrl/workflows/.github/workflows/ecr.yml@9734bc0d2e781fea96c799b9ca8a743cf6972ec1
+    uses: govyrl/workflows/.github/workflows/ecr.yml@c92489530eec66ce428fa690d85c1e8bc4ba25fb
     secrets:
       account_id: ${{ secrets.AWS_ACCOUNT_ID }}
       jfrog_user: ${{ secrets.JFROG_USER }}
