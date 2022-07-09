@@ -24,6 +24,9 @@ jobs:
       with:
         aws-region: us-west-2
         web-identity-token-file: /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v1
     - uses: actions/checkout@v2
     - uses: taylorsmithgg/aws-ecr-action@v1.1
       if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' }}
