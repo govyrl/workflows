@@ -20,6 +20,10 @@ jobs:
       DOCKER_BUILDKIT: 1
     runs-on: self-hosted
     steps:
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-region: us-west-2
+        web-identity-token-file: /var/run/secrets/eks.amazonaws.com/serviceaccount/token
     - uses: actions/checkout@v2
     - uses: taylorsmithgg/aws-ecr-action@v1.6
       if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' }}
